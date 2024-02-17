@@ -6,7 +6,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.Container {
+  padding: 1rem;
 
+}
+.ingredient{
+  display: flex;
+  width: 80%;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
