@@ -1,6 +1,6 @@
 import * as userService from "../services/user-service.js";
 import { setResponse, setErrorResponse } from "./response-handler.js";
-import { setDataResponse, setDataErrorResponse } from "./simple-response-handler.js";
+
 
 // Controller to Create user
 export const addUser = async (request, response) => {
@@ -18,9 +18,9 @@ export const oauthAddUser = async (request, response) => {
   try {
     const newUser = { ...request.body };
     const user = await userService.createOauthUser(newUser);
-    setDataResponse(user, response)
+    setResponse(user, response)
   } catch (error) {
-    setDataErrorResponse(error, response);
+    setErrorResponse(error, response);
   }
 };
 
@@ -65,9 +65,9 @@ export const getOAuthUser = async (request, response) => {
   try{
     const email = request.params.email;
     const user = await userService.findOAuthUser(email);
-    setDataResponse(user, response)
+    setResponse(user, response)
   } catch (error){
-    setDataErrorResponse(error, response)
+    setErrorResponse(error, response)
   }
 }
 

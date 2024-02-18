@@ -1,31 +1,31 @@
 import User from "../models/User.js";
-import bcrypt from "bcrypt";
+//import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 // create function will create a user and store it in the DB
 const salt = 10;
-export const create = async (newUser) => {
-    try {
-        const user = new User(newUser);
-        const password = newUser.password;
-        const hashedPassword = await bcrypt.hash(password, salt);
+// export const create = async (newUser) => {
+//     try {
+//         const user = new User(newUser);
+//         const password = newUser.password;
+//         const hashedPassword = await bcrypt.hash(password, salt);
 
-        console.log(
-            "first name: " +
-            user.firstName +
-            "last name: " +
-            user.lastName +
-            "email: " +
-            user.hashedPassword +
-            "HashPassword: " +
-            hashedPassword
-        );
-        user.hashedPassword = hashedPassword;
-        user.salt = salt;
-        return user.save();
-    } catch (err) {
-    }
-};
+//         console.log(
+//             "first name: " +
+//             user.firstName +
+//             "last name: " +
+//             user.lastName +
+//             "email: " +
+//             user.hashedPassword +
+//             "HashPassword: " +
+//             hashedPassword
+//         );
+//         user.hashedPassword = hashedPassword;
+//         user.salt = salt;
+//         return user.save();
+//     } catch (err) {
+//     }
+// };
 //createOauthUser will create an Oauth user
 export const createOauthUser = async (newUser) => {
     try {
