@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+import services from "../services";
 
 const RecipeCard = ({ recipe }) => {
-
+  const [user, setuser] = useState({ firstName: "Loading..." })
+  useEffect(() => {
+    console.log(recipe.owner)
+    services.getUserById(recipe.owner).then((response)=>{
+     setuser(response.data);
+     console.log(response.data);
+    })
+  }, [])
   return (
     <Link to={`/recipe/${recipe._id}`} style={{ textDecoration: "none" }}>
       <Card style={{transition:"none", height:"300px",position:"relative"}} className="recipe-card" variant="outlined">
@@ -20,13 +28,11 @@ const RecipeCard = ({ recipe }) => {
               </li>
             ))}
           </ul>
-          <Grid  container style={{ justifyContent: "space-between",position:"absolute",bottom:"30px" }}>
+          <Grid  container style={{ justifyContent: "space-around",position:"absolute",bottom:"30px" }}>
             <Grid  item>
               <Typography variant="body2" color="textSecondary">
-                Author: {/* Author's name */}
+                Author: {user.firstName}
               </Typography>
-            </Grid>
-            <Grid item>
               <Typography variant="body2" color="textSecondary">
                 Emission: {recipe.emission}
               </Typography>

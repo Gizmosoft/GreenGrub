@@ -84,9 +84,9 @@ const DynamicForm = () => {
     setRecipeDescription("");
 
     setFields([{ name: "", quantity: "", measurement: "" }]);
-    // setTimeout(()=>{
-    //   navigate("/explore");
-    // },5000)
+    setTimeout(()=>{
+      navigate("/explore");
+    },5000)
    
     
     

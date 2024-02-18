@@ -53,6 +53,16 @@ const services = {
       throw error;
     }
   },
+  getUserById: async (id) => {
+    try {
+      const response = await axios.get(`${API_URL}/users/id/${id}`);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching post:', error);
+      throw error;
+    }
+  },
   
   // Add more API methods as needed
 };

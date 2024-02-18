@@ -8,10 +8,12 @@ import Leaderboard from "../Components/LeaderBoard";
 const Explore = () => {
   
   const [recipes, setrecipes] = useState(null);
+  const [user, setUser] = useState(null)
   useEffect(() => {
     services.getRecipes().then((res) => {
       console.log(res);
       setrecipes(res);
+     
     });
   }, []);
 
