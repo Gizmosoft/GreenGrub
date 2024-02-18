@@ -1,15 +1,23 @@
 // import logo from './logo.svg';
-import './App.css';
-import Landing from './Pages/Landing';
-import CalculateRecipe from './CalculateRecipe';
-import SignInSide from './SignInSide';
-
+import "./App.css";
+import Landing from "./Pages/Landing";
+import CalculateRecipe from "./CalculateRecipe";
+import SignInSide from "./SignInSide";
+import {BrowserRouter as Router, Route, Routes} from  'react-router-dom';
+import Header from "./Components/NavBar";
 function App() {
   return (
-    <div className="App">
-           <Landing/>
-      {/* <SignInSide/> */}
-      <CalculateRecipe/>
+    <div className='App'>
+     <Router>
+      <Header />  
+      <Routes>
+        <Route path="/" element={<Landing/>} />
+        <Route path="/recipe-calculator" element={<CalculateRecipe/>} />
+        <Route path="/signin" element={<SignInSide/>} />
+        {/* <Route component={NotFound} /> */}
+      </Routes>
+    </Router>
+    {/* <CalculateRecipe/> */}
     </div>
   );
 }
