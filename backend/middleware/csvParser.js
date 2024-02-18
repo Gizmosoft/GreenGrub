@@ -1,21 +1,19 @@
-//const fs = import("fs");
 import fs from "fs"
-import csv from "csv-parser"
+import { parse } from 'csv-parse'
 
-export var map1 = new Map();
 
-export function CSVReader() {
+export const CSVReader = async () => {
 
-    fs.createReadStream("C:/TFC/TFC_Hackathon/Assets/SuEatableLife_Food_Fooprint_database.csv").pipe(csv())
-    .on('data', function (data) {
-        try {
-            //console.log("Product name - " + data['Food commodity ITEM']);
-            map1.set(data['Food commodity ITEM'], data['Carbon Footprint kg CO2eq/kg or l of food ITEM'])
-            console.log(map1.size)
+        const records = new Map();
+        const parser = fs
+            .createReadStream(`C:/TFC/TFC_Hackathon/Assets/SuEatableLife_Food_Fooprint_database.csv`)
+            .pipe(parse({
+                columns: true,
+              relax_column_count: true
+            }));
+        for await (const record of parser) {
+            records.set(record["Food commodity ITEM"].toLowerCase(), record["Carbon Footprint kg CO2eq/kg or l of food ITEM"]);
         }
-        catch {
-            console.log("Error occured");
-        }
-    });
-}
+        return records;
+    };
 

@@ -15,11 +15,11 @@ export const getRecipes = async (request, response) => {
 }
 
 // Controller for adding new recipe to DB
-export const createRecipe = async (request, response) => {
+export const createRecipe = (request, response) => {
     try {
         const newRecipe = {...request.body};
-        const recipe = await recipeService.createRecipe(newRecipe);
-        setResponse(recipe, response);        
+        const recipe = recipeService.createRecipe(newRecipe);
+         setResponse(recipe, response);        
     } catch (error) {
         setErrorResponse(error, response);
     }
