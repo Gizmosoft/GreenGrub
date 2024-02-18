@@ -51,18 +51,19 @@ export default function SignInSide() {
   const handleLoginSuccess = async (credentialResponse) => {
     const userCredentials = jwtDecode(credentialResponse.credential);
     const userObject = JSON.parse(JSON.stringify(userCredentials));
-
+console.log(userObject);
     // create user object
     const user = {
       first_name: userObject.given_name,
       last_name: userObject.family_name,
       email: userObject.email,
     };
-    // localStorage.setItem("user", JSON.stringify(userJsonResponse[0]));
-    // sessionStorage.setItem("user", JSON.stringify(userJsonResponse[0]));
-    navigate("/dashboard");
+    console.log(user);
+    localStorage.setItem("user", JSON.stringify(user));
+    sessionStorage.setItem("user", JSON.stringify(user));
+    navigate("/explore");
   };
-  const handleLoginFailure = () => {};
+  const handleLoginFailure = () => { };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -150,11 +151,11 @@ export default function SignInSide() {
             </Box> */}
 
 
-            
-            {/* <GoogleLogin
+
+            <GoogleLogin
               onSuccess={handleLoginSuccess}
               onError={handleLoginFailure}
-            /> */}
+            />
           </Box>
         </Grid>
       </Grid>
