@@ -17,6 +17,6 @@ router.route('/:recipeId')
     .get(recipeController.getRecipeById)
 
 router.route('/calculate')
-    .get(recipeController.calculateEmissions)
+    .patch(recipeController.calculateEmissions)
 
 export default router
