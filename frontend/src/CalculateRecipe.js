@@ -149,12 +149,10 @@ const DynamicForm = () => {
             Submit
           </Button>
 
-          <Typography variant="h6">Carbon Footprint:</Typography>
-          <Typography>
-            {carbonFootprint !== null
+          <Typography variant="h6">Carbon Footprint: {carbonFootprint !== null
               ? `${carbonFootprint} kg CO2e`
-              : "Calculating..."}
-          </Typography>
+              : "Calculating..."}</Typography>
+
         </div>
       </form>
     </div>
