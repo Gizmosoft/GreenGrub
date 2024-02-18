@@ -16,17 +16,20 @@ const Leaderboard = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Emission</TableCell>
-            <TableCell>Recipe Name</TableCell>
-            <TableCell>User Name</TableCell>
+          <TableCell> <strong>User Name</strong></TableCell>
+          <TableCell><strong>Recipe Name</strong></TableCell>
+            <TableCell><strong>Emission</strong></TableCell>
+            
+            
           </TableRow>
         </TableHead>
         <TableBody>
           {leaderboard.map((recipe, index) => (
+            index < 5 && 
             <TableRow key={index}>
-              <TableCell>{recipe.emission}</TableCell>
-              <TableCell>{recipe.name}</TableCell>
               <TableCell>User Name</TableCell>
+              <TableCell>{recipe.name}</TableCell>
+              <TableCell>{recipe.emission}</TableCell>
             </TableRow>
           ))}
         </TableBody>

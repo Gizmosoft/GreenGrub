@@ -6,7 +6,7 @@ export const CSVReader = async () => {
 
         const records = new Map();
         const parser = fs
-            .createReadStream(`D:/TFC Hackathon/TFC_Hackathon/Assets/SuEatableLife_Food_Fooprint_database.csv`)
+            .createReadStream(`../Assets/SuEatableLife_Food_Fooprint_database.csv`)
             .pipe(parse({
                 columns: true,
               relax_column_count: true

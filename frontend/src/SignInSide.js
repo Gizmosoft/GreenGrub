@@ -99,7 +99,9 @@ export default function SignInSide() {
       else {
         sessionStorage.setItem("user", JSON.stringify(userJsonResponse[0]));
         localStorage.setItem("user", JSON.stringify(userJsonResponse[0]));
+       
         navigate('/explore')
+       
       }
     } catch (error) {
       // show notif snackbar
@@ -141,6 +143,7 @@ export default function SignInSide() {
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
+
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>

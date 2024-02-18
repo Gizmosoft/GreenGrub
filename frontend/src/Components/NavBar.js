@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
@@ -6,10 +6,25 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-
+import { useNavigate } from "react-router-dom";
 function Header(props) {
   const { sections, title } = props;
+  const navigate = useNavigate();
+  const [user, setuser] = useState(null);
+  // setuser(JSON.parse(localStorage.getItem("user")));
+  useEffect(() => {
+    setuser(JSON.parse(localStorage.getItem("user")));
+  }, []);
 
+  function toggleDropdown() {
+    const userName = document.querySelector(".logout-dropdown");
+    userName.classList.toggle("open");
+  }
+  function logoutUser() {
+    localStorage.removeItem("user");
+
+    navigate("/signin");
+  }
   return (
     <React.Fragment>
       <Toolbar
@@ -22,24 +37,31 @@ function Header(props) {
           // height: 90
         }}
       >
-        <Button size="large" style={{ color: "green" }}>GREENGRUB</Button>
-        <Typography
-          component="h2"
-          variant="h5"
+        <Link
           color="inherit"
-          align="center"
           noWrap
-          sx={{ flex: 1 }}
+          variant="body2"
+          href="/"
+          sx={{ p: 1, flex: 1, textDecoration: "none", marginRight: "10px" }}
         >
-          {title}
-        </Typography>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            align="left"
+            noWrap
+            sx={{ color: "green" }}
+          >
+            GREENGRUB
+          </Typography>
+        </Link>
 
         <Link
           color="inherit"
           noWrap
           variant="body2"
           href="/explore"
-          sx={{ p: 1, flexShrink: 0 , textDecoration:"none", marginRight:"10px"}}
+          sx={{ p: 1, textDecoration: "none", marginRight: "10px" }}
         >
           <Typography
             component="h1"
@@ -47,7 +69,7 @@ function Header(props) {
             color="inherit"
             align="center"
             noWrap
-            sx={{ flex: 1, color:"#0d6efd" }}
+            sx={{ color: "#0d6efd" }}
           >
             Explore
           </Typography>
@@ -58,7 +80,7 @@ function Header(props) {
           noWrap
           variant="body2"
           href="/recipe-calculator"
-          sx={{ p: 1, flexShrink: 0 , textDecoration:"none", marginRight:"10px"}}
+          sx={{ p: 1, textDecoration: "none", marginRight: "10px" }}
         >
           <Typography
             component="h1"
@@ -66,17 +88,47 @@ function Header(props) {
             color="inherit"
             align="center"
             noWrap
-            sx={{ flex: 1, color:"#0d6efd" }}
+            sx={{ color: "#0d6efd" }}
           >
             Calculate
           </Typography>
         </Link>
-
-        <button type="button" class="btn btn-primary">
-          Sign In
-        </button>
+        {user != undefined ? (
+          <div className="user-first-name" onClick={() => toggleDropdown()}>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              align="center"
+              noWrap
+              sx={{ color: "green" }}
+            >
+              {user.firstName}
+            </Typography>
+            <div className="logout-dropdown" onClick={() => logoutUser()}>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              align="center"
+              noWrap
+              sx={{ color: "white" }}
+            >
+              Logout
+            </Typography>
+              
+            </div>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={() => navigate("/signin")}
+            class="btn btn-primary"
+          >
+            Sign In
+          </button>
+        )}
       </Toolbar>
-      
     </React.Fragment>
   );
 }

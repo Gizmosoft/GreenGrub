@@ -58,8 +58,66 @@ img {
   height: 100%;
 }
 .recipe-card {
-  transition: 0.5s all ease-in-out;
+  transition: all 0.5s ease-out 50ms !important;
 }
 .recipe-card:hover {
   transform: scale(1.05);
 }
+.explore-container {
+  display: flex;
+  height: 100%;
+}
+.explore-cards-container {
+  flex-wrap: wrap;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+.explore-leaderboard-container {
+  padding-top: 5vh;
+}
+.user-first-name {
+  position: relative;
+  cursor: pointer;
+ 
+}
+.user-first-name p{
+  margin-bottom: 0;
+}
+.logout-dropdown {
+  position: absolute;
+  top: 100%;
+  padding: 5px;
+  color: #fff;
+  background-color: chocolate;
+  border-radius: 5px;
+  display: none;
+}
+.logout-dropdown.open {
+  display: block;
+}
+/* Track */
+::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar handle */
+  border-radius: 5px; /* Rounded corners of the scrollbar handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar handle on hover */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+}
+
+/* Track on hover */
+::-webkit-scrollbar-track:hover {
+  background: #ddd; /* Color of the scrollbar track on hover */
+}
+

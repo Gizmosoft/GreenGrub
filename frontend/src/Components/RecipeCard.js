@@ -6,7 +6,7 @@ const RecipeCard = ({ recipe }) => {
 
   return (
     <Link to={`/recipe/${recipe._id}`} style={{ textDecoration: "none" }}>
-      <Card className="recipe-card" variant="outlined">
+      <Card style={{transition:"none", height:"300px",position:"relative"}} className="recipe-card" variant="outlined">
         <CardContent>
           <Typography variant="h5" component="h2">
             {recipe.name}
@@ -20,8 +20,8 @@ const RecipeCard = ({ recipe }) => {
               </li>
             ))}
           </ul>
-          <Grid container style={{ justifyContent: "space-between" }}>
-            <Grid item>
+          <Grid  container style={{ justifyContent: "space-between",position:"absolute",bottom:"30px" }}>
+            <Grid  item>
               <Typography variant="body2" color="textSecondary">
                 Author: {/* Author's name */}
               </Typography>

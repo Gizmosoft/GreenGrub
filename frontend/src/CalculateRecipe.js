@@ -10,16 +10,19 @@ import {
   Typography,
 } from "@mui/material";
 import services from "./services";
-
+import { useNavigate } from "react-router-dom";
 const recipe = require("../src/assets/recipe.jpg");
 
 const DynamicForm = () => {
+  const navigate = useNavigate();
   const [fields, setFields] = useState([
     { name: "", quantity: "", measurement: "" },
   ]);
   const [recipeName, setRecipeName] = useState("");
   const [recipeDescription, setRecipeDescription] = useState("");
   const [carbonFootprint, setCarbonFootprint] = useState(null); // Initially set to null
+
+  const [calculatedCarbonFootprint, setcalculatedCarbonFootprint] = useState("??")
 
   const handleAddField = () => {
     setFields([...fields, { name: "", quantity: "", measurement: "" }]);
@@ -45,42 +48,52 @@ const DynamicForm = () => {
   };
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
+    const user = JSON.parse(localStorage.getItem("user"))
+    let firstName = user.firstName;
+    let lastName = user.lastName;
     // Handle form submission logic here
     console.log("Form submitted:", {
       "name":recipeName,
       "steps":recipeDescription,
       ingredients: fields,
     });
+
     let recipeData =  {
       "name":recipeName,
       "steps":recipeDescription,
+      "owner":user,
       ingredients: fields,
+
     }
 
     services.createRecipe(recipeData).then((res)=>{
       console.log(res);
-      services.calculateIndex(res).then((result)=>{
+      recipeData._id = res._id;
+      services.calculateIndex(recipeData).then((result)=>{
         console.log(result);
+        setCarbonFootprint(result.emission);
       })
     })
 
     
-    const calculatedCarbonFootprint = calculateCarbonFootprint(fields);
-    setCarbonFootprint(calculatedCarbonFootprint);
+   
     // Reset form fields after submission
     setRecipeName("");
     setRecipeDescription("");
 
     setFields([{ name: "", quantity: "", measurement: "" }]);
+    // setTimeout(()=>{
+    //   navigate("/explore");
+    // },5000)
+   
+    
+    
   };
   // Function to calculate carbon footprint based on ingredients and quantities
 
-  const calculateCarbonFootprint = (ingredients) => {
-    // Calculate carbon footprint logic goes here
-    // For example, sum up the carbon footprint of each ingredient
-    return 100; // Placeholder value for demonstration
-  };
+
   return (
     <div className="recipe-container">
       <div className="recipe-img-container">
