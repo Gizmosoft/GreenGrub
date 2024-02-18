@@ -1,5 +1,5 @@
 import recipeModel from "../models/Recipe.js";
-import {CSVReader} from "../../middleware/csvParser.js";
+import { CSVReader } from "../../middleware/csvParser.js";
 
 
 // searchAll is a helper service function
@@ -17,15 +17,23 @@ export const createRecipe = async (newRecipe) => {
 
 // create is a helper service function
 export const calculateEmissions = async (newRecipe) => {
-    const recipe = new recipeModel(newRecipe);
-    const calCount = 0;
-    var mapData = new Map();
+    //const recipe = new recipeModel(newRecipe);
+    var calCount = 0;
     const records = await CSVReader();
-   records.forEach(logMapElements);
-   console.log(records.get("TUNA (F)"));
+    //records.forEach(logMapElements);
 
+    var ingredientsArray = newRecipe.ingredients;
+
+    for (var i = 0; i < ingredientsArray.length; i++) {
+        var name = ingredientsArray[i]["name"];
+        var carbonCount = records.get(name);
+        calCount += ((ingredientsArray[i]["quantity"] * 15) / 1000) * carbonCount
+    }
+
+    //calCount += records.get("TUNA (F)");
+    return calCount;
 };
 
 function logMapElements(value, key, map) {
     console.log(`m[${key}] = ${value}`);
-  }
+}

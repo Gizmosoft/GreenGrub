@@ -10,4 +10,7 @@ router.route('/')
 router.route('/create')
     .post(recipeController.createRecipe)
 
+router.route('/calculate')
+    .get(recipeController.calculateEmissions)
+
 export default router
