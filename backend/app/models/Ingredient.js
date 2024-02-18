@@ -12,7 +12,7 @@ const IngredientSchema = new Schema({
         type: Number,
         required: true
     },
-    measurment: {
+    measurement: {
         type: String,
         required: true
     },

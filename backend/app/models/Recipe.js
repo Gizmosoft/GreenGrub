@@ -12,8 +12,8 @@ const RecipeSchema = new Schema({
         type: String,
         required: true
     },
-    // owner: { type: Schema.Types.ObjectId, ref: "User" },
-    // ingredients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }],
+    owner: { type: Schema.Types.ObjectId, ref: "User" },
+    ingredients: [{ type: Schema.Types.Array, ref: "Ingredient" }],
     emission: {
         type: Number,
         required: false
