@@ -19,7 +19,7 @@ export const createRecipe = (request, response) => {
     try {
         const newRecipe = {...request.body};
         const recipe = recipeService.createRecipe(newRecipe);
-         setResponse(recipe, response);        
+        setResponse(recipe, response);        
     } catch (error) {
         setErrorResponse(error, response);
     }
