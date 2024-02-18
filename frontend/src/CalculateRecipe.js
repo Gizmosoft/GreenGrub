@@ -9,19 +9,20 @@ import {
   TextareaAutosize,
   Typography,
 } from "@mui/material";
+import services from "./services";
 
 const recipe = require("../src/assets/recipe.jpg");
 
 const DynamicForm = () => {
   const [fields, setFields] = useState([
-    { ingredient: "", quantity: "", measurement: "" },
+    { name: "", quantity: "", measurement: "" },
   ]);
   const [recipeName, setRecipeName] = useState("");
   const [recipeDescription, setRecipeDescription] = useState("");
   const [carbonFootprint, setCarbonFootprint] = useState(null); // Initially set to null
 
   const handleAddField = () => {
-    setFields([...fields, { ingredient: "", quantity: "", measurement: "" }]);
+    setFields([...fields, { name: "", quantity: "", measurement: "" }]);
   };
 
   const handleRemoveField = (index) => {
@@ -47,17 +48,31 @@ const DynamicForm = () => {
     e.preventDefault();
     // Handle form submission logic here
     console.log("Form submitted:", {
-      recipeName,
-      recipeDescription,
+      "name":recipeName,
+      "steps":recipeDescription,
       ingredients: fields,
     });
+    let recipeData =  {
+      "name":recipeName,
+      "steps":recipeDescription,
+      ingredients: fields,
+    }
+
+    services.createRecipe(recipeData).then((res)=>{
+      console.log(res);
+      services.calculateIndex(res).then((result)=>{
+        console.log(result);
+      })
+    })
+
+    
     const calculatedCarbonFootprint = calculateCarbonFootprint(fields);
     setCarbonFootprint(calculatedCarbonFootprint);
     // Reset form fields after submission
     setRecipeName("");
     setRecipeDescription("");
 
-    setFields([{ ingredient: "", quantity: "", measurement: "" }]);
+    setFields([{ name: "", quantity: "", measurement: "" }]);
   };
   // Function to calculate carbon footprint based on ingredients and quantities
 
@@ -100,9 +115,9 @@ const DynamicForm = () => {
           <Grid container spacing={2} key={index} style={{ padding: "10px" }}>
             <Grid item xs={4}>
               <TextField
-                name="ingredient"
+                name="name"
                 label="Ingredient Name"
-                value={field.ingredient}
+                value={field.name}
                 onChange={(e) => handleChange(index, e)}
                 fullWidth
               />

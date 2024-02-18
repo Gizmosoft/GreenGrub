@@ -3,9 +3,10 @@ import { Card, CardContent, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const RecipeCard = ({ recipe }) => {
+
   return (
     <Link to={`/recipe/${recipe._id}`} style={{ textDecoration: "none" }}>
-      <Card variant="outlined">
+      <Card className="recipe-card" variant="outlined">
         <CardContent>
           <Typography variant="h5" component="h2">
             {recipe.name}

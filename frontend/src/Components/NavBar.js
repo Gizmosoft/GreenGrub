@@ -22,7 +22,7 @@ function Header(props) {
           // height: 90
         }}
       >
-        <Button size="large">GreenFood</Button>
+        <Button size="large" style={{ color: "green" }}>GREENGRUB</Button>
         <Typography
           component="h2"
           variant="h5"
@@ -50,6 +50,25 @@ function Header(props) {
             sx={{ flex: 1, color:"#0d6efd" }}
           >
             Explore
+          </Typography>
+        </Link>
+
+        <Link
+          color="inherit"
+          noWrap
+          variant="body2"
+          href="/recipe-calculator"
+          sx={{ p: 1, flexShrink: 0 , textDecoration:"none", marginRight:"10px"}}
+        >
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            align="center"
+            noWrap
+            sx={{ flex: 1, color:"#0d6efd" }}
+          >
+            Calculate
           </Typography>
         </Link>
 

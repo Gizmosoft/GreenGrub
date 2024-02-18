@@ -42,7 +42,7 @@ export const calculateEmissions = async (newRecipe) => {
     for (var i = 0; i < ingredientsArray.length; i++) {
         var name = ingredientsArray[i]["name"];
         var carbonCount = records.get(name);
-        var strComparer = ingredientsArray[i]["measurement"].toLowerCase().replace(/ +/g, "");
+        var strComparer = ingredientsArray == "" ? "" : ingredientsArray[i]["measurement"].toLowerCase().replace(/ +/g, "");
         var quantity = 0;
         switch (strComparer) {
             case "teaspoon": quantity = T_SPOON;
@@ -54,5 +54,6 @@ export const calculateEmissions = async (newRecipe) => {
         calCount += ((ingredientsArray[i]["quantity"] * quantity) / 1000) * carbonCount;
     }
     recipe.emission = calCount;
+    recipe.isNew = false;
     return recipe.save();
 };

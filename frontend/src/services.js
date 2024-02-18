@@ -33,6 +33,27 @@ const services = {
       throw error;
     }
   },
+  createRecipe: async (recipe) => {
+    try {
+      const response = await axios.post(`${API_URL}/recipes/create`,recipe);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching post:', error);
+      throw error;
+    }
+  },
+  calculateIndex: async (recipe) => {
+    try {
+      const response = await axios.patch(`${API_URL}/recipes/calculate`,recipe);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching post:', error);
+      throw error;
+    }
+  },
+  
   // Add more API methods as needed
 };
 
