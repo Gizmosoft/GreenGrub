@@ -10,6 +10,12 @@ router.route('/')
 router.route('/create')
     .post(recipeController.createRecipe)
 
+router.route('/recipe/:userId')
+    .get(recipeController.getRecipesByUserId)
+
+router.route('/:recipeId')
+    .get(recipeController.getRecipeById)
+
 router.route('/calculate')
     .get(recipeController.calculateEmissions)
 

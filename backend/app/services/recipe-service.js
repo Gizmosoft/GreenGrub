@@ -8,6 +8,17 @@ export const searchAll = async (params = {}) => {
     return recipes;
 };
 
+// get Recipes by user Id
+export const getRecipesByUserId = async (owner) => {
+    const recipes = await recipeModel.find({owner}).exec();
+    return recipes;
+}
+
+// get Recipe by recipe Id
+export const getRecipeById = async (recipeId) => {
+    const recipe = await recipeModel.findById(recipeId).exec();
+    return recipe;
+}
 
 // create is a helper service function
 export const createRecipe = async (newRecipe) => {
